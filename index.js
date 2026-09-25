@@ -25,9 +25,9 @@ const readAndRequireFiles = async (directory) => {
 
 const initialize = async () => {
   console.log("\n╔══════════════════════════════╗");
-  console.log("  ║    X-ANSARI v4.0.0          ║");
-  console.log("  ║   Baileys 7.0.0-rc14        ║");
-  console.log("  ╚══════════════════════════════╝\n");
+  console.log("║    X-ANSARI v4.0.0          ║");
+  console.log("║   Baileys 7.0.0-rc14        ║");
+  console.log("╚══════════════════════════════╝\n");
 
   try {
     // Init auth backend early (creates table / opens DB)
