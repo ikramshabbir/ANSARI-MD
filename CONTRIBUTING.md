@@ -1,6 +1,6 @@
-# Contributing to X-Asena
+# Contributing to IKRAM
 
-Thanks for your interest in improving X-Asena. This guide covers how to set up the project, make changes, and open a pull request.
+Thanks for your interest in improving IKRAM. This guide covers how to set up the project, make changes, and open a pull request.
 
 ## Code of conduct
 
@@ -8,7 +8,7 @@ Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). Be respe
 
 ## Before you start
 
-1. Search [existing issues](https://github.com/Neeraj-x0/X-Asena/issues) and PRs to avoid duplicates.
+1. Search [existing issues](https://github.com/ikramshabbir/ansari/issues) and PRs to avoid duplicates.
 2. For larger features, open an issue first so we can agree on scope.
 3. Read the [README](README.md) for architecture, env vars, and command overview.
 4. Never commit secrets (`.env`, session DBs, API keys, admin tokens).
@@ -18,8 +18,7 @@ Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). Be respe
 **Requirements:** Node.js ≥ 20, FFmpeg on `PATH`, Git.
 
 ```bash
-git clone https://github.com/Neeraj-x0/X-Asena.git
-cd X-Asena
+git clone https://github.com/ikramshabbir/ansari
 npm install
 cp .env.example .env
 # Edit .env — at least set OWNER_NUMBER
@@ -91,7 +90,7 @@ Legacy history before Baileys v7 lives on the `pre-v7` branch. New work targets 
 
 Use a bug issue (or the bug template) and include:
 
-- X-Asena / Node / OS versions
+- IKRAM / Node / OS versions
 - Baileys version (`package.json`)
 - Steps to reproduce
 - Expected vs actual behaviour
@@ -102,4 +101,4 @@ Security issues: see [SECURITY.md](SECURITY.md) — do not open a public issue f
 
 ## License
 
-By contributing, you agree that your contributions are licensed under the [MIT License](LICENSE).
+By contributing, you agree that your contributions are licensed under the [License](LICENSE).
