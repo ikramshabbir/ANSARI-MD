@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for X-Asena
+about: Suggest an idea for ANSARI
 title: "[feat] "
 labels: enhancement
 assignees: ""
