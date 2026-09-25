@@ -1,4 +1,4 @@
-# Contributing to IKRAM
+# Contributing to ANSARI
 
 Thanks for your interest in improving IKRAM. This guide covers how to set up the project, make changes, and open a pull request.
 
