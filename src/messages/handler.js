@@ -1167,25 +1167,21 @@ export async function messageHandler(
       )
     ) {
 
-      let groupMetadata =
-        groupCache.get(
-          message.from
-        );
+      let groupMetadata;
+
+    if (command.botAdminRequired) {
+      groupMetadata = await conn.groupMetadata(message.from);
+      groupCache.set(message.from, groupMetadata);
+    } else {
+      groupMetadata = groupCache.get(message.from);
 
       if (!groupMetadata) {
-
-        groupMetadata =
-          await conn.groupMetadata(
-            message.from
-          );
-
-        groupCache.set(
-          message.from,
-          groupMetadata
-        );
+        groupMetadata = await conn.groupMetadata(message.from);
+        groupCache.set(message.from, groupMetadata);
       }
+    }
 
-      const groupValidation =
+    const groupValidation =
         validateGroupPermissions(
           message,
           groupMetadata,
