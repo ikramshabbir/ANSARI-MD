@@ -1,5 +1,5 @@
 /**
- * Terminal Input Handler for X-ANSARI
+ * Terminal Input Handler for ANSARI
  * Shortcuts: Q logout, R restart, A wipe auth DB
  */
 
