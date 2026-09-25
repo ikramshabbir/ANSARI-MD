@@ -13,7 +13,7 @@ Please **do not** open a public GitHub issue for security problems.
 
 Report privately to:
 
-- **Email:** krishnaneeraj773@gmail.com
+- **Email:** ikramshabbir44056@gmail.com@gmail.com
 - Or use GitHub **Private vulnerability reporting** on this repository if enabled
 
 Include:
