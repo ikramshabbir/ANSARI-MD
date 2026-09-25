@@ -1,0 +1,91 @@
+import fs from "fs/promises";
+import path from "path";
+import connect from "./src/socket/connection.js";
+import { commands } from "./src/plugins.js";
+import { initTerminalHandler } from "./src/terminal/handler.js";
+import { useMultiDbAuthState, checkAuthCreds, getSavedSessionIds } from "./src/database/authState.js";
+import config from "./config.js";
+
+global.__basedir = path.resolve();
+
+const readAndRequireFiles = async (directory) => {
+  try {
+    const files = await fs.readdir(directory);
+    const jsFiles = files.filter((file) => file.endsWith(".js"));
+    await Promise.all(
+      jsFiles.map((file) =>
+        import(`file://${path.join(directory, file).replace(/\\/g, "/")}`)
+      )
+    );
+  } catch (error) {
+    console.error("Error loading files:", error);
+    throw error;
+  }
+};
+
+const initialize = async () => {
+  console.log("\n╔══════════════════════════════╗");
+  console.log("  ║    X-ANSARI v4.0.0          ║");
+  console.log("  ║   Baileys 7.0.0-rc14        ║");
+  console.log("  ╚══════════════════════════════╝\n");
+
+  try {
+    // Init auth backend early (creates table / opens DB)
+    console.log(
+      config.USE_POSTGRES
+        ? "⏳ Initializing Postgres auth..."
+        : `⏳ Initializing SQLite auth (${config.SQLITE_PATH})...`
+    );
+    await useMultiDbAuthState();
+
+    const credsCheck = await checkAuthCreds();
+    if (credsCheck.hasCreds) {
+      console.log("✅ Credentials found");
+    } else if (process.env.PAIRING_NUMBER) {
+      console.log(
+        `ℹ️  No credentials — pairing code login (${process.env.PAIRING_NUMBER.replace(/\D/g, "")})`
+      );
+    } else {
+      console.log(
+        "ℹ️  No credentials — QR login (or set PAIRING_NUMBER for code login)"
+      );
+    }
+
+    // Load plugins (skip database folder auto-import — auth is factory-based)
+    await readAndRequireFiles(path.join(global.__basedir, "src/plugins"));
+    console.log(`✅ ${commands.length} Plugins Loaded!`);
+
+    initTerminalHandler();
+
+    // Optional enterprise admin HTTP (localhost + token)
+    try {
+      const { startAdminHttp } = await import("./src/enterprise/adminHttp.js");
+      startAdminHttp();
+    } catch (err) {
+      console.warn("Admin HTTP not started:", err?.message || err);
+    }
+
+    console.log("⏳ Connecting to WhatsApp...\n");
+    await connect();
+    const savedSessions = await getSavedSessionIds();
+    if (savedSessions.length) {
+      console.log(`🔄 Restoring ${savedSessions.length} saved WhatsApp session(s)...`);
+      for (const sessionId of savedSessions) {
+        try {
+          const creds = await checkAuthCreds(sessionId);
+          if (!creds.hasCreds) continue;
+          console.log(`♻️ Auto-reconnecting: ${sessionId}`);
+          await connect(sessionId);
+        } catch (error) {
+          console.log(`❌ Auto-reconnect failed: ${sessionId}`, error?.message || error);
+        }
+      }
+    }
+
+  } catch (error) {
+    console.error("❌ Initialization error:", error);
+    process.exit(1);
+  }
+};
+
+initialize();
