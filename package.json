@@ -10,7 +10,7 @@
     "start": "node index.js",  
     "dev": "nodemon index.js"  
   },  
-  "repository": "https://github.com/ikramshabbir/X-ANSARI-MD",  
+  "repository": "https://github.com/ikramshabbir/X-ANSARI",  
   "author": "IKRAM <ikramshabbir44056@gmail.com>",  
   "license": "MIT",  
   "private": false,  
