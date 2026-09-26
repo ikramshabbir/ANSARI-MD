@@ -1,4 +1,4 @@
-# Contributing to ANSARI
+# Contributing to X-ANSARI
 
 Thanks for your interest in improving IKRAM. This guide covers how to set up the project, make changes, and open a pull request.
 
@@ -8,7 +8,7 @@ Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). Be respe
 
 ## Before you start
 
-1. Search [existing issues](https://github.com/ikramshabbir/ansari/issues) and PRs to avoid duplicates.
+1. Search [existing issues](https://github.com/ikramshabbir/x-ansari/issues) and PRs to avoid duplicates.
 2. For larger features, open an issue first so we can agree on scope.
 3. Read the [README](README.md) for architecture, env vars, and command overview.
 4. Never commit secrets (`.env`, session DBs, API keys, admin tokens).
